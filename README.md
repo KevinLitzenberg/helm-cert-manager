@@ -8,19 +8,19 @@ Note: cert-manager should never be embedded as a sub-chart into other Helm chart
 ### Install cert-manager
 
 1. Add the repository:
-```helm repo add jetstack https://charts.jetstack.io
+``` helm repo add jetstack https://charts.jetstack.io
 ```
 
 2. Update local Helm repo.
-```helm repo update
+``` helm repo update
 ```
 
 3. Create the namespace for cert-manager
-```kubectl create namespace cert-manager
+``` kubectl create namespace cert-manager
 ```
 
 4. Install the CRDs (CustomReasourceDefinitions) with kubectl. 
-```kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
+``` kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
 ```
 **Notes:**
 * Install CRD seperatly from Helm makes it simplier to uninstall the CRD later.  See in Helm chart docs. "--set installCRDs=true"
@@ -36,13 +36,13 @@ customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io create
 ```
 
 5. Install cert-manager with Helm 
-```helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.16.0
+``` helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v0.16.0
 ```
 **NOTES**
 * version optional
 
 6. Verify install
-```kubectl get pods --namespace cert-manager
+``` kubectl get pods --namespace cert-manager
 ```
 
 7. Create an Issuer to test the webhook
@@ -76,12 +76,12 @@ EOF
 
 8. Create the resource
 
-```kubectl apply -f dev/test-resources.yaml
+``` kubectl apply -f dev/test-resources.yaml
 ```
 
 9. Test the resource.
 
-```kubectl delete -f dev/test-resources.yaml
+``` kubectl delete -f dev/test-resources.yaml
 ```
 
 ## Uninstall cert-manager
@@ -89,11 +89,11 @@ EOF
 [https://hub.helm.sh/charts/jetstack/cert-manager](https://hub.helm.sh/charts/jetstack/cert-manager)
 
 1. Uninstall the Helm Chart by deleting the helm deployment.
-```helm delete cert-manager --namespace cert-manager
+``` helm delete cert-manager --namespace cert-manager
 ```
 
 2. Delete the CustomResourceDefinition resources.
-```kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
+``` kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml
 ```
 **Outputs:**
 ```customresourcedefinition.apiextensions.k8s.io "certificaterequests.cert-manager.io" deleted
@@ -103,5 +103,3 @@ customresourcedefinition.apiextensions.k8s.io "clusterissuers.cert-manager.io" d
 customresourcedefinition.apiextensions.k8s.io "issuers.cert-manager.io" deleted
 customresourcedefinition.apiextensions.k8s.io "orders.acme.cert-manager.io" deleted
 ```
-
-
