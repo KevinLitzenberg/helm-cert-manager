@@ -8,15 +8,19 @@ Note: cert-manager should never be embedded as a sub-chart into other Helm chart
 ### Install cert-manager
 
 1. Add the repository:
+
 ` helm repo add jetstack https://charts.jetstack.io`
 
 2. Update local Helm repo.
+
 ` helm repo update`
 
 3. Create the namespace for cert-manager
+
 ` kubectl create namespace cert-manager`
 
-4. Install the CRDs (CustomReasourceDefinitions) with kubectl. 
+4. Install the CRDs (CustomReasourceDefinitions) with kubectl.
+ 
 ` kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml`
 
 **Notes:**
@@ -37,7 +41,8 @@ customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io create
 **NOTES**
 * version optional
 
-6. Verify install
+6. Verify install.
+
 ` kubectl get pods --namespace cert-manager`
 
 7. Create an Issuer to test the webhook
@@ -69,7 +74,7 @@ spec:
 EOF
 ```
 
-8. Create the resource
+8. Create the resource.
 
 ` kubectl apply -f dev/test-resources.yaml`
 
@@ -82,9 +87,11 @@ EOF
 [https://hub.helm.sh/charts/jetstack/cert-manager](https://hub.helm.sh/charts/jetstack/cert-manager)
 
 1. Uninstall the Helm Chart by deleting the helm deployment.
+
 ` helm delete cert-manager --namespace cert-manager`
 
 2. Delete the CustomResourceDefinition resources.
+
 `kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.crds.yaml`
 **Outputs:**
 ```customresourcedefinition.apiextensions.k8s.io "certificaterequests.cert-manager.io" deleted
